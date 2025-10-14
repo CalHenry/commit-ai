@@ -1,0 +1,14 @@
+# Ignore the fake_repo folder
+/commit-ai/fake_repo
+
+
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
