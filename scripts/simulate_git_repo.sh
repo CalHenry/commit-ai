@@ -2,6 +2,10 @@
 
 # I asked AI to generate a fake repo with a few git commits so i could have material to work on to develop the ai commit agent
 
+mkdir -p fake_repo
+cd fake_repo
+git init
+
 # Create initial files
 cat > main.py << 'EOL'
 def greet(name):
@@ -9,7 +13,7 @@ def greet(name):
 
 if __name__ == "__main__":
     greet("World")
-EOL
+EOL>
 
 cat > utils.py << 'EOL'
 def add(a, b):

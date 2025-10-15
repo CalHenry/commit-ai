@@ -1,5 +1,9 @@
 # AI agent to push better commit messages
 
+## Goals
+- create a usefull agent
+- get better with git
+- develop a local solution, no LLM bills, no data sent to a server
 
 - local LLM
 - small LLM
@@ -11,11 +15,11 @@ I develop this for myself.
 
 
 #### LLM context from the Git repo:
-- git diff (list of staged files + staged changes)
+- git diff's output (list of staged files + staged changes)
 - previous commit
 - potential pre-wrote (by me) commit message
 
-##### LLM action:
+### LLM action:
 - model loaded
 - process the prompt with:
   - default prompt(s) to write a commit
@@ -23,3 +27,17 @@ I develop this for myself.
 - write a commit message
 - show the commit message for my validation
 - if i accept, commit the changes
+
+### workflow
+
+- get git diff content to a file
+```sh
+  git diff --output='git_diff'
+```
+- get commit message (with git hook)
+
+
+
+### !TODO
+
+- model name to .env

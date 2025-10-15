@@ -1,6 +1,8 @@
 # Ignore the fake_repo folder
 /commit-ai/fake_repo
 
+/archive/
+
 
 # Python-generated files
 __pycache__/

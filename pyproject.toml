@@ -4,4 +4,9 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "marimo>=0.16.5",
+    "ollama>=0.6.0",
+    "rich>=14.2.0",
+    "textual>=6.3.0",
+]
