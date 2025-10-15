@@ -16,11 +16,7 @@ class EditableTextApp(App):
         yield Footer()
 
     def on_mount(self) -> None:
-        """Get the current text from the TextArea at any time."""
-        # You can access the current text like this:
         text_area = self.query_one("#text_area", TextArea)
-        # text_area.text contains the current content
-
 
 if __name__ == "__main__":
     app = EditableTextApp("default text")

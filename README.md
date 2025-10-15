@@ -39,5 +39,5 @@ I develop this for myself.
 
 
 ### !TODO
-
+- better prompt
 - model name to .env
