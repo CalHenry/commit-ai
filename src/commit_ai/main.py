@@ -2,21 +2,13 @@ import os
 import sys
 import typer
 
-from scripts.helpers import (
+from .helpers import (
     get_diff_output,
     get_llm_response,
     parse_llm_response,
     finalize_commit,
 )
-from scripts.tui import EditableTextApp
-from test_commits import long_gitdiff, complex_gitdiff, mixed_gitdiff, ml_gitdiff
-
-# Test different kind of git diffs:
-long_gitdiff = long_gitdiff
-complex_gitdiff = complex_gitdiff
-mixed_gitdiff = mixed_gitdiff
-ml_gitdiff = ml_gitdiff
-
+from .tui import EditableTextApp
 
 typer_app = typer.Typer()
 
@@ -24,9 +16,6 @@ typer_app = typer.Typer()
 @typer_app.command()
 def main():
     ###### Git diff ######
-
-    fake_repo_path = "./fake_repo"
-    os.chdir(fake_repo_path)
 
     diff_output = get_diff_output()
 

@@ -1,5 +1,28 @@
 # AI agent to push better commit messages
 
+AI commit messages writer from a single command line.
+
+Use a local LLM to do a first version of the commit message. Editable and discardable.
+
+How it works:
+1. gather informations about the changes (git diff)
+2. provide this information to a local llm (runs with ollama)
+3. AI create a commit message
+4. displayed in a TUI and editable
+- if accepted --> do the commit
+- if rejected --> do nothing
+
+
+
+## Installation
+
+
+## Requirements
+- machine that has a gpu (or ARM) to run a small llm
+- Ollama installed
+
+--------------------------------------------------------
+
 ## Learning (DevObs)
 - create a tool that uses ai as a small helper
 - create a TUI  with **Textual** and a CLI with **Typer**

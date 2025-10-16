@@ -1,11 +1,7 @@
-[build-system]
-requires = ["setuptools>=45", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "commit-ai"
 version = "0.1.0"
-description = "Write better commit message with an AI first shot that's editable. 100% in the terminal."
+description = "AI commit messages writer from a single command line"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -14,8 +10,9 @@ dependencies = [
     "typer>=0.19.2",
 ]
 
-[project.scripts]
-commit-ai = "main:typer_app"
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.setuptools]
-#packages = ["commit-ai"]
+[project.scripts]
+commit-ai = "commit_ai.main:typer_app"
