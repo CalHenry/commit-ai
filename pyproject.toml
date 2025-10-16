@@ -1,12 +1,21 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "commit-ai"
 version = "0.1.0"
-description = "Add your description here"
+description = "Write better commit message with an AI first shot that's editable. 100% in the terminal."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "marimo>=0.16.5",
     "ollama>=0.6.0",
-    "rich>=14.2.0",
     "textual>=6.3.0",
+    "typer>=0.19.2",
 ]
+
+[project.scripts]
+commit-ai = "main:typer_app"
+
+[tool.setuptools]
+#packages = ["commit-ai"]

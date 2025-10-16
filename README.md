@@ -1,5 +1,11 @@
 # AI agent to push better commit messages
 
+## Learning (DevObs)
+- create a tool that uses ai as a small helper
+- create a TUI  with **Textual** and a CLI with **Typer**
+- build a python package that can be used in the command line
+- learn more about **setuptools** and **pyproject**
+
 ## Goals
 - create a usefull agent
 - get better with git
@@ -30,14 +36,20 @@ I develop this for myself.
 
 ### workflow
 
-- get git diff content to a file
-```sh
-  git diff --output='git_diff'
+- get git diff content to a var
+```python
+  subprocess.check_output(["git", "diff"], text=True)
 ```
-- get commit message (with git hook)
+- **!TODO** get commit message (with git hook)
+- get llm response
+```python
+    ollama.generate(model, prompt, ...)
+```
 
 
 
-### !TODO
-- better prompt
+### Nexct steps
+- [X] better prompt
 - model name to .env
+- get commit message as well
+- better looking app (add buttom)

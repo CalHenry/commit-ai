@@ -1,5 +1,13 @@
 import os
-from scripts.helpers import get_diff_output, get_llm_response
+import sys
+import typer
+
+from scripts.helpers import (
+    get_diff_output,
+    get_llm_response,
+    parse_llm_response,
+    finalize_commit,
+)
 from scripts.tui import EditableTextApp
 from test_commits import long_gitdiff, complex_gitdiff, mixed_gitdiff, ml_gitdiff
 
@@ -10,8 +18,12 @@ mixed_gitdiff = mixed_gitdiff
 ml_gitdiff = ml_gitdiff
 
 
+typer_app = typer.Typer()
+
+
+@typer_app.command()
 def main():
-    ###### Git ######
+    ###### Git diff ######
 
     fake_repo_path = "./fake_repo"
     os.chdir(fake_repo_path)
@@ -36,6 +48,7 @@ def main():
 
     Always include a body unless the change is trivial (e.g., typo fix).
     For complex changes, use bullet points to separate logical units.
+    Respond in JSON format with a key for type, subject and body
 
     git diff output:
     {diff_output}
@@ -44,12 +57,19 @@ def main():
     llm_response = get_llm_response(model, prompt)
     llm_response = str(llm_response["response"])
 
-    print(llm_response)
+    llm_commit_message = parse_llm_response(llm_response)
 
     ###### TUI ######
-    # app = EditableTextApp(llm_response)
-    # app.run()
+    app = EditableTextApp(llm_commit_message)
+    final_message = app.run()
+
+    if final_message is None:
+        print("Commit cancelled.")
+        sys.exit(0)
+
+    ###### Git Commit ######
+    finalize_commit(final_message)
 
 
 if __name__ == "__main__":
-    main()
+    typer_app()
