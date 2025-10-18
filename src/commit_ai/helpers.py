@@ -20,6 +20,11 @@ def finalize_commit(commit_message):
 
 
 ###### Ollama utils ######
+def load_config():
+    with open("config.json", "r") as f:
+        return json.load(f)
+
+
 def get_llm_response(model: str, prompt: str):
     return ollama.generate(
         model,

@@ -1,9 +1,9 @@
-import os
 import sys
 import typer
 
 from .helpers import (
     get_diff_output,
+    load_config,
     get_llm_response,
     parse_llm_response,
     finalize_commit,
@@ -20,7 +20,9 @@ def main():
     diff_output = get_diff_output()
 
     ###### Ollama ######
-    model = "qwen2.5:7b"
+
+    config = load_config()
+    MODEL_NAME = config["model_name"]
 
     prompt = f"""
     Write a **clear, concise, and structured** Git commit message for the following changes.
@@ -43,7 +45,7 @@ def main():
     {diff_output}
     """
 
-    llm_response = get_llm_response(model, prompt)
+    llm_response = get_llm_response(MODEL_NAME, prompt)
     llm_response = str(llm_response["response"])
 
     llm_commit_message = parse_llm_response(llm_response)

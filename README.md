@@ -1,4 +1,7 @@
-# AI agent to push better commit messages
+# AI agent to write better commit messages
+
+> ! DISCLAIMER
+> First version of the project. It works but i have to add tests, robust paths and more.
 
 AI commit messages writer from a single command line.
 
@@ -7,15 +10,63 @@ Use a local LLM to do a first version of the commit message. Editable and discar
 How it works:
 1. gather informations about the changes (git diff)
 2. provide this information to a local llm (runs with ollama)
-3. AI create a commit message
-4. displayed in a TUI and editable
-- if accepted --> do the commit
-- if rejected --> do nothing
-
-
+3. AI creates a commit message
+4. Message is displayed in a TUI and is editable
+- **ctrl-s** to accept --> do the commit
+- **escape** --> do nothing and quit
 
 ## Installation
 
+1. Install [**uv**](https://docs.astral.sh/uv/)
+
+Unix:
+```sh
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+Windows:
+```sh
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+2. Install as a tool using uv
+```sh
+uv tool install git+https://github.com/CalHenry/commit-ai.git
+```
+
+3. Check the Installation
+```which commit-ai```
+
+4. Usage
+```sh
+commit-ai
+```
+
+5. (Optional) create an alias for the tool
+```sh
+echo '' >> ~/.zshrc
+echo '# Alias for commit-ai tool' >> ~/.zshrc
+echo 'alias cai="commit-ai"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+If you just want to run the tool and not install it use:
+```sh
+uvx git+https://github.com/CalHenry/commit-ai.git
+```
+(this will launch the tool, get the git diff of the current directory and run the llm)
+
+- To contribute or modify:
+```sh
+# Clone the repo
+git clone https://github.com/yourusername/commit-ai.git
+cd commit-ai
+
+# Or install as a tool in development mode
+uv tool install -e .
+
+# ready
+which commit-ai
+```
 
 ## Requirements
 - machine that has a gpu (or ARM) to run a small llm
@@ -28,19 +79,6 @@ How it works:
 - create a TUI  with **Textual** and a CLI with **Typer**
 - build a python package that can be used in the command line
 - learn more about **setuptools** and **pyproject**
-
-## Goals
-- create a usefull agent
-- get better with git
-- develop a local solution, no LLM bills, no data sent to a server
-
-- local LLM
-- small LLM
-- easy to acces with a CLI
-- only for writting/ rewritting commit messages
-
-I develop this for myself.
-- I code in python for Data science and i have 'simple' repo to manage, usually a single branch and only a set of scripts.
 
 
 #### LLM context from the Git repo:
@@ -68,11 +106,3 @@ I develop this for myself.
 ```python
     ollama.generate(model, prompt, ...)
 ```
-
-
-
-### Nexct steps
-- [X] better prompt
-- model name to .env
-- get commit message as well
-- better looking app (add buttom)
