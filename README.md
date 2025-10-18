@@ -1,19 +1,17 @@
 # AI agent to write better commit messages
-
-> ! DISCLAIMER
-> First version of the project. It works but i have to add tests, robust paths and more.
+----
 
 AI commit messages writer from a single command line.
 
-Use a local LLM to do a first version of the commit message. Editable and discardable.
+Use a LLM that runs locally to do a first draft of the git commit message. Editable or discardable.
 
 How it works:
 1. gather informations about the changes (git diff)
-2. provide this information to a local llm (runs with ollama)
+2. pass this information to the llm (runs with ollama)
 3. AI creates a commit message
 4. Message is displayed in a TUI and is editable
-- **ctrl-s** to accept --> do the commit
-- **escape** --> do nothing and quit
+  - **ctrl-s** to accept --> do the commit
+  - **escape** --> do nothing and quit
 
 ## Installation
 
@@ -55,7 +53,7 @@ uvx git+https://github.com/CalHenry/commit-ai.git
 ```
 (this will launch the tool, get the git diff of the current directory and run the llm)
 
-- To contribute or modify:
+### Contribute or modify:
 ```sh
 # Clone the repo
 git clone https://github.com/yourusername/commit-ai.git
@@ -72,37 +70,13 @@ which commit-ai
 - machine that has a gpu (or ARM) to run a small llm
 - Ollama installed
 
+## More informations
+
+- The app is build with Typer
+- You can use any model as long as it supports JSON output
+- Default model is [Granite-4.0-H-Tiny](https://huggingface.co/ibm-granite/granite-4.0-h-tiny) (4.2 GB)
+
+## 🛡️ License <a name="license"></a>
+Project is distributed under [MIT License](https://github.com/CalHenry/commit-ai/blob/main/LICENSE)
+
 --------------------------------------------------------
-
-## Learning (DevObs)
-- create a tool that uses ai as a small helper
-- create a TUI  with **Textual** and a CLI with **Typer**
-- build a python package that can be used in the command line
-- learn more about **setuptools** and **pyproject**
-
-
-#### LLM context from the Git repo:
-- git diff's output (list of staged files + staged changes)
-- previous commit
-- potential pre-wrote (by me) commit message
-
-### LLM action:
-- model loaded
-- process the prompt with:
-  - default prompt(s) to write a commit
-  - context from the repo
-- write a commit message
-- show the commit message for my validation
-- if i accept, commit the changes
-
-### workflow
-
-- get git diff content to a var
-```python
-  subprocess.check_output(["git", "diff"], text=True)
-```
-- **!TODO** get commit message (with git hook)
-- get llm response
-```python
-    ollama.generate(model, prompt, ...)
-```
