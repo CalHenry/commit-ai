@@ -9,7 +9,8 @@ How it works:
 1. gather informations about the changes (git diff)
 2. pass this information to the llm (runs with ollama)
 3. AI creates a commit message
-4. Message is displayed in a TUI and is editable
+4. message is validated by Pydantic
+5. message is displayed in a TUI and is editable
   - **ctrl-s** to accept --> do the commit
   - **escape** --> do nothing and quit
 
@@ -73,7 +74,8 @@ which commit-ai
 ## More informations
 
 - The app is build with Typer
-- You can use any model as long as it supports JSON output
+- Pydantic gives the response schema and validates the output
+- You can use any model as long as it supports JSON output. Each model is different, you should try to find one that fits you best
 - Default model is [Granite-4.0-H-Tiny](https://huggingface.co/ibm-granite/granite-4.0-h-tiny) (4.2 GB)
 
 ## 🛡️ License <a name="license"></a>
