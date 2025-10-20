@@ -1,6 +1,7 @@
 import subprocess
 import ollama
 import json
+from pathlib import Path
 
 
 ###### Git utils ######
@@ -21,7 +22,10 @@ def finalize_commit(commit_message):
 
 ###### Ollama utils ######
 def load_config():
-    with open("config.json", "r") as f:
+    package_dir = Path(__file__).parent
+    config_path = package_dir / "config.json"
+
+    with open(config_path, "r") as f:
         return json.load(f)
 
 
