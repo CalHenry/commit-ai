@@ -43,8 +43,6 @@ def get_llm_response(model: str, prompt: str):
 
 
 def parse_llm_response(llm_response_json):
-    parsed_llm_response = json.loads(llm_response_json)
-
-    llm_commit_message = "\n".join(parsed_llm_response.values())
+    llm_commit_message = json.loads(llm_response_json)
 
     return llm_commit_message
