@@ -19,13 +19,17 @@ def main():
     ###### Git diff ######
     diff_output = get_diff_output()
 
+    if not diff_output.strip():
+        print("No changes to commit. Stage your changes with 'git add' first.")
+        sys.exit(0)
+        
     ###### Ollama ######
     config = load_config()
     MODEL_NAME = config["model_name"]
     prompt = get_prompt(diff_output)
 
     llm_response_str = get_llm_response(MODEL_NAME, prompt)
-    llm_commit_message = validate_llm_response(llm_response_str)  #
+    llm_commit_message = validate_llm_response(llm_response_str)
 
     ###### TUI ######
     app = EditableTextApp(llm_commit_message.format())
